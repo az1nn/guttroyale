@@ -140,6 +140,19 @@ def main() -> int:
         errors.append("referência legada encontrada no HTML")
 
     css = CSS_PATH.read_text(encoding="utf-8")
+
+    # Prevent HTML/CSS contract drift after homepage layout changes.
+    if 'class="hero"' in html:
+        for selector in (".hero {", ".hero-visual {", ".hero-frame {"):
+            if selector not in css:
+                errors.append(f"contrato visual da home ausente no CSS: {selector}")
+
+    # Version frontend assets so Pages/CDN/browser caches cannot mix
+    # a reverted HTML document with a stylesheet from a newer layout.
+    if 'href="style.css?v=' not in html:
+        errors.append("style.css deve usar cache-busting versionado")
+    if 'src="script.js?v=' not in html:
+        errors.append("script.js deve usar cache-busting versionado")
     for match in re.finditer(r"url\(\s*['\"]?([^)'\"\s]+)", css):
         ref = match.group(1)
         if is_external(ref):
