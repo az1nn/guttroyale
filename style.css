@@ -1576,3 +1576,270 @@ body.royale-app {
     filter:none !important;
   }
 }
+
+
+/* =========================================================
+   HERO LAYOUT SAFETY / VIEWPORT SYMMETRY
+   Prevents clipping and deck collisions on wide-short screens.
+   ========================================================= */
+
+.hero.hero-pro {
+  min-height:max(calc(100svh - (var(--shell-gap) * 2)), 720px);
+  height:auto;
+  overflow:hidden;
+}
+
+.hero-pro-grid {
+  min-height:inherit;
+  height:auto;
+  padding:
+    clamp(108px, 13vh, 146px)
+    clamp(30px, 5.2vw, 96px)
+    clamp(142px, 18vh, 186px);
+  align-items:center;
+}
+
+.hero-pro-copy {
+  width:min(620px, 100%);
+  align-self:center;
+}
+
+.hero-pro-role {
+  margin-top:clamp(18px, 3vh, 34px);
+}
+
+.hero-pro-title {
+  margin-top:7px !important;
+}
+
+.hero-pro-prince {
+  font-size:clamp(78px, min(8.4vw, 17vh), 154px);
+}
+
+.hero-pro-gutt {
+  font-size:clamp(104px, min(11.1vw, 22vh), 206px);
+}
+
+.hero-pro-signature {
+  margin-top:clamp(18px, 2.5vh, 28px);
+}
+
+.hero-pro-tagline {
+  margin-top:11px;
+}
+
+.hero-pro-actions {
+  margin-top:clamp(22px, 3.2vh, 34px);
+}
+
+.hero-pro-actions a {
+  min-height:46px;
+}
+
+.hero-pro-rail {
+  align-self:center;
+  margin-bottom:0;
+}
+
+.hero-pro-scroll {
+  bottom:clamp(118px, 14vh, 152px);
+}
+
+.countdown-wrap {
+  width:min(1380px, calc(100% - 48px));
+  max-width:none;
+  margin:clamp(-72px, -7vh, -52px) auto 34px;
+  padding:12px;
+  grid-template-columns:minmax(250px, .72fr) minmax(0, 1.28fr);
+  gap:10px;
+}
+
+.countdown-wrap > div:first-child {
+  padding:10px 16px;
+}
+
+.countdown-wrap h2 {
+  font-size:clamp(40px, 3.4vw, 54px);
+  line-height:.88;
+}
+
+.countdown {
+  gap:8px;
+}
+
+.countdown > div {
+  min-height:104px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:12px 8px;
+}
+
+.countdown strong {
+  font-size:clamp(40px, 3.5vw, 52px);
+}
+
+@media (max-height:820px) and (min-width:761px) {
+  .hero.hero-pro {
+    min-height:720px;
+  }
+
+  .hero-pro-grid {
+    padding-top:102px;
+    padding-bottom:132px;
+  }
+
+  .hero-pro-copy {
+    width:min(560px, 100%);
+  }
+
+  .hero-pro-date {
+    font-size:9px;
+    letter-spacing:.20em;
+  }
+
+  .hero-pro-role {
+    margin-top:14px;
+    font-size:9px;
+    letter-spacing:.25em;
+  }
+
+  .hero-pro-prince {
+    font-size:clamp(72px, min(7vw, 15vh), 122px);
+  }
+
+  .hero-pro-gutt {
+    font-size:clamp(96px, min(9.6vw, 20vh), 164px);
+  }
+
+  .hero-pro-signature {
+    margin-top:14px;
+  }
+
+  .hero-pro-signature p {
+    font-size:11px;
+  }
+
+  .hero-pro-tagline {
+    margin-top:8px;
+    font-size:8px;
+  }
+
+  .hero-pro-actions {
+    margin-top:18px;
+  }
+
+  .hero-pro-actions a {
+    min-height:42px;
+    padding-inline:15px;
+  }
+
+  .hero-pro-rail {
+    transform:translateY(-12px);
+  }
+
+  .hero-pro-scroll {
+    display:none;
+  }
+
+  .countdown-wrap {
+    margin:-52px auto 28px;
+    padding:10px;
+  }
+
+  .countdown-wrap > div:first-child {
+    padding:8px 14px;
+  }
+
+  .countdown-wrap h2 {
+    font-size:42px;
+  }
+
+  .countdown > div {
+    min-height:94px;
+    padding:10px 6px;
+  }
+
+  .countdown strong {
+    font-size:44px;
+  }
+}
+
+@media (max-height:680px) and (min-width:761px) {
+  .hero.hero-pro {
+    min-height:690px;
+  }
+
+  .hero-pro-grid {
+    padding-top:94px;
+    padding-bottom:118px;
+  }
+
+  .hero-pro-prince {
+    font-size:88px;
+  }
+
+  .hero-pro-gutt {
+    font-size:120px;
+  }
+
+  .hero-pro-role {
+    margin-top:10px;
+  }
+
+  .hero-pro-signature {
+    margin-top:10px;
+  }
+
+  .hero-pro-actions {
+    margin-top:14px;
+  }
+
+  .hero-pro-rail {
+    display:none;
+  }
+
+  .countdown-wrap {
+    margin:-42px auto 24px;
+  }
+}
+
+@media (max-width:760px) {
+  .hero.hero-pro {
+    min-height:max(calc(100svh - 12px), 680px);
+    height:auto;
+  }
+
+  .hero-pro-grid {
+    min-height:inherit;
+    padding:92px 20px 120px;
+  }
+
+  .hero-pro-copy {
+    width:100%;
+  }
+
+  .hero-pro-prince {
+    font-size:clamp(64px, 20vw, 94px);
+  }
+
+  .hero-pro-gutt {
+    font-size:clamp(86px, 27vw, 128px);
+  }
+
+  .countdown-wrap {
+    width:calc(100% - 22px);
+    margin:-50px auto 14px;
+  }
+}
+
+@media (max-width:420px) {
+  .hero-pro-grid {
+    padding-bottom:116px;
+  }
+
+  .hero-pro-actions {
+    grid-template-columns:1fr;
+  }
+}
