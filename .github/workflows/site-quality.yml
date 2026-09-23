@@ -1,0 +1,47 @@
+name: Site quality
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Validate HTML, accessibility basics and local references
+        run: python3 scripts/validate_site.py
+
+      - name: Check JavaScript syntax
+        run: node --check script.js
+
+      - name: Smoke test static site
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4173 >/tmp/guttroyale-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+
+          for _ in {1..10}; do
+            if curl --fail --silent --show-error http://127.0.0.1:4173/ >/tmp/guttroyale-index.html; then
+              break
+            fi
+            sleep 1
+          done
+
+          test -s /tmp/guttroyale-index.html
+          grep -q "GUTT ROYALE" /tmp/guttroyale-index.html
