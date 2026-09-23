@@ -123,7 +123,7 @@ img { display:block; max-width:100%; }
 .experience-card h3 { font-family:"Bebas Neue"; font-size:45px; font-weight:400; }
 .experience-card p { color:#89847d; line-height:1.6; font-size:12px; margin-top:10px; max-width:360px; }
 
-.visual-break { min-height:75vh; background:linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.15)), url("https://raw.githubusercontent.com/comercialestilodevet-create/guttroyale/main/prince-gutt.png") center 35% / cover no-repeat; display:flex; align-items:flex-end; padding:70px 8vw; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.visual-break { min-height:75vh; background:linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.15)), url("prince-gutt.png") center 35% / cover no-repeat; display:flex; align-items:flex-end; padding:70px 8vw; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
 .visual-copy h2 { font-size:clamp(80px,11vw,165px); }
 
 .location-copy { color:#9a948d; line-height:1.7; max-width:430px; margin:24px 0 28px; }
