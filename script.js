@@ -81,3 +81,34 @@ if (mobileMenu) {
     if (event.key === "Escape") mobileMenu.removeAttribute("open");
   });
 }
+
+
+const professionalHero = document.querySelector("[data-hero]");
+if (professionalHero && !prefersReducedMotion && window.matchMedia("(pointer:fine)").matches) {
+  const heroCopy = professionalHero.querySelector("[data-hero-copy]");
+
+  const moveHero = (event) => {
+    const rect = professionalHero.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5);
+    const y = ((event.clientY - rect.top) / rect.height - 0.5);
+
+    professionalHero.style.setProperty("--hero-x", `${x * -8}px`);
+    professionalHero.style.setProperty("--hero-y", `${y * -6}px`);
+    professionalHero.style.setProperty("--hero-copy-x", `${x * 4}px`);
+    professionalHero.style.setProperty("--hero-copy-y", `${y * 3}px`);
+  };
+
+  const resetHero = () => {
+    professionalHero.style.setProperty("--hero-x", "0px");
+    professionalHero.style.setProperty("--hero-y", "0px");
+    professionalHero.style.setProperty("--hero-copy-x", "0px");
+    professionalHero.style.setProperty("--hero-copy-y", "0px");
+  };
+
+  professionalHero.addEventListener("pointermove", moveHero, { passive: true });
+  professionalHero.addEventListener("pointerleave", resetHero, { passive: true });
+
+  if (heroCopy) {
+    requestAnimationFrame(() => heroCopy.classList.add("is-ready"));
+  }
+}
