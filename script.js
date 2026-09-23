@@ -58,11 +58,19 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
 
 const header = document.querySelector("[data-floating-header]");
 if (header) {
+  let headerFrame = 0;
+
   const syncHeader = () => {
     header.classList.toggle("is-scrolled", window.scrollY > 48);
+    headerFrame = 0;
   };
+
+  const requestHeaderSync = () => {
+    if (!headerFrame) headerFrame = requestAnimationFrame(syncHeader);
+  };
+
   syncHeader();
-  window.addEventListener("scroll", syncHeader, { passive: true });
+  window.addEventListener("scroll", requestHeaderSync, { passive: true });
 }
 
 
@@ -80,32 +88,57 @@ if (mobileMenu) {
 
 const professionalHero = document.querySelector("[data-hero]");
 if (professionalHero && !prefersReducedMotion && window.matchMedia("(pointer:fine)").matches) {
-  const heroCopy = professionalHero.querySelector("[data-hero-copy]");
+  const current = { x: 0, y: 0, copyX: 0, copyY: 0 };
+  const target = { x: 0, y: 0, copyX: 0, copyY: 0 };
+  let heroFrame = 0;
+
+  const renderHeroMotion = () => {
+    const ease = 0.075;
+    current.x += (target.x - current.x) * ease;
+    current.y += (target.y - current.y) * ease;
+    current.copyX += (target.copyX - current.copyX) * ease;
+    current.copyY += (target.copyY - current.copyY) * ease;
+
+    professionalHero.style.setProperty("--hero-x", `${current.x.toFixed(2)}px`);
+    professionalHero.style.setProperty("--hero-y", `${current.y.toFixed(2)}px`);
+    professionalHero.style.setProperty("--hero-copy-x", `${current.copyX.toFixed(2)}px`);
+    professionalHero.style.setProperty("--hero-copy-y", `${current.copyY.toFixed(2)}px`);
+
+    const moving =
+      Math.abs(target.x - current.x) > 0.05 ||
+      Math.abs(target.y - current.y) > 0.05 ||
+      Math.abs(target.copyX - current.copyX) > 0.05 ||
+      Math.abs(target.copyY - current.copyY) > 0.05;
+
+    heroFrame = moving ? requestAnimationFrame(renderHeroMotion) : 0;
+  };
+
+  const ensureHeroFrame = () => {
+    if (!heroFrame) heroFrame = requestAnimationFrame(renderHeroMotion);
+  };
 
   const moveHero = (event) => {
     const rect = professionalHero.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5);
-    const y = ((event.clientY - rect.top) / rect.height - 0.5);
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
 
-    professionalHero.style.setProperty("--hero-x", `${x * -8}px`);
-    professionalHero.style.setProperty("--hero-y", `${y * -6}px`);
-    professionalHero.style.setProperty("--hero-copy-x", `${x * 4}px`);
-    professionalHero.style.setProperty("--hero-copy-y", `${y * 3}px`);
+    target.x = x * -4.5;
+    target.y = y * -3.2;
+    target.copyX = x * 2.2;
+    target.copyY = y * 1.6;
+    ensureHeroFrame();
   };
 
   const resetHero = () => {
-    professionalHero.style.setProperty("--hero-x", "0px");
-    professionalHero.style.setProperty("--hero-y", "0px");
-    professionalHero.style.setProperty("--hero-copy-x", "0px");
-    professionalHero.style.setProperty("--hero-copy-y", "0px");
+    target.x = 0;
+    target.y = 0;
+    target.copyX = 0;
+    target.copyY = 0;
+    ensureHeroFrame();
   };
 
   professionalHero.addEventListener("pointermove", moveHero, { passive: true });
   professionalHero.addEventListener("pointerleave", resetHero, { passive: true });
-
-  if (heroCopy) {
-    requestAnimationFrame(() => heroCopy.classList.add("is-ready"));
-  }
 }
 
 
@@ -137,22 +170,4 @@ if (navSections.length && "IntersectionObserver" in window) {
   });
 
   navSections.forEach(({ target }) => navObserver.observe(target));
-}
-
-const interactiveCards = document.querySelectorAll(".artist, .experience-card, .partner, .ticket-box");
-if (!prefersReducedMotion && window.matchMedia("(pointer:fine)").matches) {
-  interactiveCards.forEach((card) => {
-    card.addEventListener("pointermove", (event) => {
-      const rect = card.getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-      card.style.setProperty("--card-x", `${x * 2.5}px`);
-      card.style.setProperty("--card-y", `${y * 2.5}px`);
-    }, { passive:true });
-
-    card.addEventListener("pointerleave", () => {
-      card.style.removeProperty("--card-x");
-      card.style.removeProperty("--card-y");
-    }, { passive:true });
-  });
 }
