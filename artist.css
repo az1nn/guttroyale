@@ -28,3 +28,69 @@ color:var(--text);font-family:"Inter",sans-serif;min-height:100vh}a{color:inheri
 .artist-footer{max-width:1480px;margin:auto;padding:28px 5vw 45px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:#69645e;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
 @media(max-width:900px){.artist-nav{height:66px}.artist-page{padding-top:30px}.artist-hero{grid-template-columns:1fr}.artist-portrait{min-height:68svh;max-height:760px}.artist-copy h1{font-size:clamp(74px,23vw,122px)}.artist-details{grid-template-columns:1fr}.artist-brand span{display:none}}
 @media(max-width:560px){.artist-page{padding-left:18px;padding-right:18px}.artist-nav{padding:0 18px}.artist-portrait{min-height:520px}.release{font-size:15px}.artist-actions{display:grid}.artist-button{width:100%}.artist-footer{padding-left:18px;padding-right:18px;flex-direction:column}}
+
+
+/* Brand + motion polish */
+.artist-nav{
+  background:rgba(3,3,3,.82);
+  backdrop-filter:blur(20px) saturate(130%);
+  -webkit-backdrop-filter:blur(20px) saturate(130%);
+}
+.artist-brand img{
+  width:58px;
+  height:58px;
+  filter:drop-shadow(0 10px 24px rgba(0,0,0,.42));
+}
+.back-link,
+.artist-button{
+  transition:
+    transform .42s cubic-bezier(.22,1,.36,1),
+    border-color .3s ease,
+    color .3s ease,
+    background .3s ease;
+}
+.artist-portrait{
+  border-radius:20px;
+  transition:transform .65s cubic-bezier(.22,1,.36,1),box-shadow .55s ease;
+}
+.artist-portrait img{
+  transition:transform .8s cubic-bezier(.22,1,.36,1),filter .5s ease;
+}
+.artist-portrait:hover{
+  transform:translateY(-4px);
+  box-shadow:0 40px 100px rgba(0,0,0,.52);
+}
+.artist-portrait:hover img{
+  transform:scale(1.018);
+}
+.artist-copy{
+  animation:artistCopyIn .8s .08s cubic-bezier(.22,1,.36,1) both;
+}
+.artist-portrait{
+  animation:artistPortraitIn .85s cubic-bezier(.22,1,.36,1) both;
+}
+.artist-footer{
+  align-items:center;
+}
+.artist-footer-brand{
+  width:72px;
+  height:72px;
+  object-fit:contain;
+  filter:drop-shadow(0 10px 24px rgba(0,0,0,.38));
+}
+@keyframes artistPortraitIn{
+  from{opacity:0;transform:translateY(22px) scale(.992);filter:blur(3px)}
+  to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+}
+@keyframes artistCopyIn{
+  from{opacity:0;transform:translateY(18px);filter:blur(3px)}
+  to{opacity:1;transform:translateY(0);filter:blur(0)}
+}
+@media(max-width:900px){
+  .artist-brand img{width:50px;height:50px}
+  .artist-footer-brand{width:60px;height:60px}
+}
+@media(prefers-reduced-motion:reduce){
+  .artist-copy,.artist-portrait{animation:none!important}
+  .artist-portrait,.artist-portrait img,.back-link,.artist-button{transition:none!important}
+}
