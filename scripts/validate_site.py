@@ -163,6 +163,61 @@ def main() -> int:
         if not path.exists():
             errors.append(f"referência local inexistente no CSS: {ref}")
 
+    expected_artist_pages = (
+        "prince-gutt",
+        "putodiparis",
+        "dj-gabs",
+        "nivi",
+        "norre",
+        "perola-kenia",
+        "skilo22",
+        "dj-cafeina",
+    )
+    artist_dir = ROOT / "artistas"
+    for slug in expected_artist_pages:
+        rel = f"artistas/{slug}.html"
+        page = ROOT / rel
+        if not page.exists():
+            errors.append(f"página de artista ausente: {rel}")
+            continue
+        if f'href="{rel}"' not in html:
+            errors.append(f"card do line-up sem link para: {rel}")
+
+        page_html = page.read_text(encoding="utf-8")
+        page_parser = SiteAuditParser()
+        page_parser.feed(page_html)
+        prefix = f"{rel}: "
+
+        for error in page_parser.errors:
+            errors.append(prefix + error)
+
+        duplicates = [value for value, count in Counter(page_parser.ids).items() if count > 1]
+        if duplicates:
+            errors.append(prefix + "IDs duplicados: " + ", ".join(sorted(duplicates)))
+
+        if page_parser.lang != "pt-BR":
+            errors.append(prefix + f"lang esperado pt-BR, encontrado {page_parser.lang!r}")
+        if page_parser.h1_count != 1:
+            errors.append(prefix + f"esperado exatamente 1 h1, encontrado {page_parser.h1_count}")
+        if page_parser.title_count != 1:
+            errors.append(prefix + f"esperado exatamente 1 title, encontrado {page_parser.title_count}")
+        if not page_parser.canonical or not page_parser.canonical.startswith("https://"):
+            errors.append(prefix + "canonical HTTPS absoluto ausente")
+
+        for key in required_meta:
+            if not page_parser.meta.get(key):
+                errors.append(prefix + f"metadado obrigatório ausente: {key}")
+
+        for tag, ref in page_parser.local_refs:
+            target = (page.parent / ref).resolve()
+            try:
+                target.relative_to(ROOT.resolve())
+            except ValueError:
+                errors.append(prefix + f"referência local escapa do repositório em <{tag}>: {ref}")
+                continue
+            if not target.exists():
+                errors.append(prefix + f"referência local inexistente em <{tag}>: {ref}")
+
     if errors:
         print("Site audit: FAIL")
         for error in errors:
