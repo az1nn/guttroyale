@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://az1nn.github.io/guttroyale/sitemap.xml

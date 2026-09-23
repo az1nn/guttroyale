@@ -65,3 +65,15 @@ if (header) {
   syncHeader();
   window.addEventListener("scroll", syncHeader, { passive: true });
 }
+
+
+const mobileMenu = document.querySelector(".mobile-menu");
+if (mobileMenu) {
+  mobileMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => mobileMenu.removeAttribute("open"));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") mobileMenu.removeAttribute("open");
+  });
+}
