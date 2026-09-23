@@ -39,11 +39,9 @@ URL de publicação prevista:
 
 `https://az1nn.github.io/guttroyale/`
 
-No estado auditado em **22/09/2026**, o repositório ainda está com GitHub Pages desabilitado (`has_pages: false`). Para publicar, habilite em:
+No estado auditado em **22/09/2026**, o GitHub Pages está habilitado (`has_pages: true`). O build e o deploy nativos do Pages concluíram com sucesso após o merge `f95ad6f6`.
 
-**Settings → Pages → Deploy from a branch → `master` → `/ (root)`**
-
-Depois de habilitado, o canonical, Open Graph, sitemap e robots já apontam para a URL acima.
+O canonical, Open Graph, sitemap e robots apontam para a URL publicada acima.
 
 ## Estado técnico
 
@@ -63,7 +61,6 @@ Correções consolidadas:
 
 ### Pendente de infraestrutura
 
-- habilitar GitHub Pages;
 - considerar proteção/ruleset para `master`;
 - otimizar `prince-gutt.png` (~2,9 MB) e `gutt-royale-logo-final.png` (~1,1 MB) para reduzir o payload inicial sem degradar a arte.
 
