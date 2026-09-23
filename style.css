@@ -155,6 +155,51 @@ img { display:block; max-width:100%; }
 .artist-overlay small { color:var(--gold-light); font-size:9px; font-weight:800; letter-spacing:.18em; }
 .artist-overlay h3 { font-size:58px; margin-top:8px; }
 
+.artist.artist-photo {
+  padding:0;
+  min-height:220px;
+  position:relative;
+  overflow:hidden;
+  background:#090909;
+}
+.artist.artist-photo img {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.82) contrast(1.04) saturate(.96);
+  transition:transform .45s ease, filter .45s ease;
+}
+.artist.artist-photo:after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.06) 18%,rgba(0,0,0,.9) 100%);
+  pointer-events:none;
+}
+.artist.artist-photo:hover img {
+  transform:scale(1.025);
+  filter:brightness(.88) contrast(1.04) saturate(1);
+}
+.artist.artist-photo .artist-overlay {
+  left:18px;
+  right:18px;
+  bottom:18px;
+}
+.artist.artist-photo .artist-overlay h3 {
+  font-size:38px;
+  margin-top:8px;
+}
+.artist.artist-photo .artist-overlay small {
+  color:var(--gold-light);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.16em;
+}
+.artist-photo-skilo img { object-position:center 18%; }
+.artist-photo-cafeina img { object-position:center center; }
+
 .experience-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:12px; }
 .experience-card { min-height:230px; border:1px solid var(--line); padding:28px; background:#0a0a0a; }
 .experience-card.large { grid-row:span 2; min-height:472px; background:linear-gradient(145deg,#1a0c17,#090909); }
@@ -268,6 +313,8 @@ img { display:block; max-width:100%; }
   .artist { min-height:180px; padding:16px; }
   .artist h3 { font-size:32px; }
   .artist-overlay h3 { font-size:48px; }
+  .artist.artist-photo { min-height:180px; }
+  .artist.artist-photo .artist-overlay h3 { font-size:30px; }
   .experience-grid { grid-template-columns:1fr; }
   .experience-card.large { min-height:300px; }
   .visual-break { min-height:70vh; padding:50px 22px; }
