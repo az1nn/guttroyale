@@ -212,13 +212,13 @@ img { display:block; max-width:100%; }
   font-weight:800;
   letter-spacing:.16em;
 }
-.artist-photo-skilo img { object-position:center 18%; }
+.artist-photo-skilo img { object-position:center 28%; }
 .artist-photo-cafeina img { object-position:center center; }
-.artist-photo-gabs img { object-position:center 22%; }
-.artist-photo-putodiparis img { object-position:center 18%; }
-.artist-photo-nivi img { object-position:center 14%; }
-.artist-photo-norre img { object-position:center 18%; }
-.artist-photo-perola img { object-position:center 20%; }
+.artist-photo-gabs img { object-position:center center; }
+.artist-photo-putodiparis img { object-position:center 30%; }
+.artist-photo-nivi img { object-position:center 24%; }
+.artist-photo-norre img { object-position:center 30%; }
+.artist-photo-perola img { object-position:center 24%; }
 
 .experience-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:12px; }
 .experience-card { min-height:230px; border:1px solid var(--line); padding:28px; background:#0a0a0a; }
@@ -926,3 +926,11 @@ summary:focus-visible {
   }
   .hero-pro-scroll i { animation: none !important; }
 }
+
+
+/* 4K lineup media */
+.lineup-grid .artist img {
+  image-rendering:auto;
+  backface-visibility:hidden;
+}
+.artist.featured img { object-position:center 30%; }
