@@ -58,9 +58,13 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
 const header = document.querySelector(".site-header");
 if (header) {
   const syncHeader = () => {
-    header.style.background = window.scrollY > 40
-      ? "rgba(5,5,5,.92)"
-      : "rgba(5,5,5,.72)";
+    const scrolled = window.scrollY > 40;
+    header.style.background = scrolled
+      ? "rgba(5,5,5,.94)"
+      : "rgba(3,3,3,.14)";
+    header.style.borderBottomColor = scrolled
+      ? "rgba(255,255,255,.12)"
+      : "rgba(255,255,255,.08)";
   };
   syncHeader();
   window.addEventListener("scroll", syncHeader, { passive: true });
