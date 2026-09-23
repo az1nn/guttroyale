@@ -59,7 +59,7 @@ img { display:block; max-width:100%; }
   font-weight:900;
   letter-spacing:.12em;
 }
-.mobile-menu .faq-list summary::-webkit-details-marker { display:none; }
+.mobile-menu summary::-webkit-details-marker { display:none; }
 .mobile-menu[open] summary { border-color:var(--pink); color:#ff65e5; }
 .mobile-menu-panel {
   position:absolute;
@@ -204,7 +204,7 @@ img { display:block; max-width:100%; }
 .faq-list { border-top:1px solid var(--line); }
 .faq-list details { border-bottom:1px solid var(--line); padding:24px 0; }
 .faq-list summary { list-style:none; cursor:pointer; font-weight:800; font-size:14px; display:flex; justify-content:space-between; gap:20px; }
-summary::-webkit-details-marker { display:none; }
+.faq-list summary::-webkit-details-marker { display:none; }
 .faq-list summary:after { content:"+"; color:var(--gold-light); font-size:18px; }
 .faq-list details[open] summary:after { content:"−"; }
 .faq-list details p { color:#858078; line-height:1.7; font-size:12px; padding:14px 30px 0 0; max-width:600px; }
