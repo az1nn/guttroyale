@@ -2,21 +2,37 @@
 
 Site oficial estático do **GUTT ROYALE**, preparado para GitHub Pages.
 
-## Estado atual
+## Estrutura
 
-- `index.html` — página principal válida na raiz do repositório
-- `style.css` — layout, identidade visual e responsividade
-- `script.js` — contagem regressiva, reveal-on-scroll e header
-- Imagens principais servidas pelo repositório de origem preservado via `raw.githubusercontent.com`
-- Sem dependência de pasta `assets/`
-- Corrigido o erro histórico `index.html.html`
-- Corrigida a referência quebrada `assets/prince-gutt.png`
+- `index.html` — página principal válida na raiz
+- `style.css` — identidade visual, layout responsivo e estados de acessibilidade
+- `script.js` — contagem regressiva, reveal-on-scroll e comportamento do header
+- `prince-gutt.png` — arte principal
+- `gutt-royale-logo-final.png` — logo
+- `cpx-labs.png` — parceiro
+- `vida-dura.png` — realização
+- `.nojekyll` — publicação estática sem processamento Jekyll
 
-## Publicação
+## Correções aplicadas
+
+- removido o erro histórico `index.html.html`
+- removidas referências quebradas para `assets/`
+- imagens migradas para a raiz do próprio repositório
+- corrigido o background da seção visual
+- JavaScript protegido contra elementos ausentes
+- fallback para navegadores sem `IntersectionObserver`
+- suporte a `prefers-reduced-motion`
+- melhorias de foco, navegação por teclado e responsividade mobile
+
+## Publicação no GitHub Pages
 
 Branch principal: `master`.
 
-Para GitHub Pages, use **Settings → Pages → Deploy from a branch → master → /root**.
+Em **Settings → Pages**, use:
+
+- **Source:** Deploy from a branch
+- **Branch:** `master`
+- **Folder:** `/ (root)`
 
 ## Evento
 
