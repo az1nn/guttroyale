@@ -156,6 +156,10 @@ img { display:block; max-width:100%; }
 .lineup-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
 .artist { min-height:220px; background:linear-gradient(145deg,#111,#070707); border:1px solid var(--line); padding:22px; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; transition:.3s ease; }
 .artist:hover { transform:translateY(-5px); border-color:rgba(216,163,59,.6); }
+.artist-card-link { position:absolute; inset:0; z-index:6; cursor:pointer; }
+.artist-card-link:after { content:"VER ARTISTA ↗"; position:absolute; top:14px; left:14px; padding:7px 8px; background:rgba(3,3,3,.72); border:1px solid rgba(255,255,255,.16); color:#f1ebe3; font-size:8px; font-weight:900; letter-spacing:.12em; opacity:0; transform:translateY(-4px); transition:.2s ease; }
+.artist:hover .artist-card-link:after,.artist-card-link:focus-visible:after { opacity:1; transform:none; }
+.artist-card-link:focus-visible { outline:3px solid var(--pink); outline-offset:-4px; }
 .artist h3 { font-family:"Bebas Neue"; font-size:42px; font-weight:400; line-height:.9; position:relative; z-index:2; }
 .artist span { color:#777168; font-size:9px; letter-spacing:.13em; font-weight:800; margin-top:8px; position:relative; z-index:2; }
 .artist-number { position:absolute; top:18px; right:20px; color:#393631; font-family:"Bebas Neue"; font-size:34px; }
