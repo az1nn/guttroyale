@@ -1,38 +1,71 @@
 # GUTT ROYALE — THE PRINCIPADO EXPERIENCE
 
-Site oficial estático do **GUTT ROYALE**, preparado para GitHub Pages.
+Site oficial estático do **GUTT ROYALE**, preparado para publicação no GitHub Pages.
 
 ## Estrutura
 
-- `index.html` — página principal válida na raiz
-- `style.css` — identidade visual, layout responsivo e estados de acessibilidade
-- `script.js` — contagem regressiva, reveal-on-scroll e comportamento do header
-- `prince-gutt.png` — arte principal
-- `gutt-royale-logo-final.png` — logo
-- `cpx-labs.png` — parceiro
-- `vida-dura.png` — realização
+- `index.html` — conteúdo, SEO/social metadata e dados estruturados do evento
+- `style.css` — identidade visual, responsividade e estados de acessibilidade
+- `script.js` — contagem regressiva, reveal-on-scroll, header e navegação móvel
+- `scripts/validate_site.py` — auditoria estática sem dependências externas
+- `.github/workflows/site-quality.yml` — quality gate para pushes e pull requests
+- `robots.txt` e `sitemap.xml` — descoberta por crawlers
+- assets PNG na raiz — identidade visual e parceiros
 - `.nojekyll` — publicação estática sem processamento Jekyll
 
-## Correções aplicadas
+## Quality gate
 
-- removido o erro histórico `index.html.html`
-- removidas referências quebradas para `assets/`
-- imagens migradas para a raiz do próprio repositório
-- corrigido o background da seção visual
-- JavaScript protegido contra elementos ausentes
-- fallback para navegadores sem `IntersectionObserver`
-- suporte a `prefers-reduced-motion`
-- melhorias de foco, navegação por teclado e responsividade mobile
+O workflow **Site quality** executa:
 
-## Publicação no GitHub Pages
+1. validação de HTML, IDs e âncoras;
+2. checagem de referências locais e imagens com `alt`;
+3. verificação de links `target="_blank"` com `noopener`;
+4. presença de canonical, Open Graph e Twitter Cards;
+5. sintaxe de `script.js`;
+6. smoke test do site servido por HTTP.
+
+A mesma validação pode ser executada localmente:
+
+```bash
+python3 scripts/validate_site.py
+node --check script.js
+```
+
+## Publicação
 
 Branch principal: `master`.
 
-Em **Settings → Pages**, use:
+URL de publicação prevista:
 
-- **Source:** Deploy from a branch
-- **Branch:** `master`
-- **Folder:** `/ (root)`
+`https://az1nn.github.io/guttroyale/`
+
+No estado auditado em **22/09/2026**, o repositório ainda está com GitHub Pages desabilitado (`has_pages: false`). Para publicar, habilite em:
+
+**Settings → Pages → Deploy from a branch → `master` → `/ (root)`**
+
+Depois de habilitado, o canonical, Open Graph, sitemap e robots já apontam para a URL acima.
+
+## Estado técnico
+
+Correções consolidadas:
+
+- removido o erro histórico `index.html.html`;
+- assets locais sem dependência do repositório antigo;
+- referências quebradas para `assets/` removidas;
+- fallback para navegadores sem `IntersectionObserver`;
+- suporte a `prefers-reduced-motion`;
+- navegação por teclado e foco visível;
+- navegação móvel restaurada;
+- offset de âncoras para o header fixo;
+- SEO/social metadata com URLs absolutas;
+- JSON-LD do evento;
+- quality gate automático.
+
+### Pendente de infraestrutura
+
+- habilitar GitHub Pages;
+- considerar proteção/ruleset para `master`;
+- otimizar `prince-gutt.png` (~2,9 MB) e `gutt-royale-logo-final.png` (~1,1 MB) para reduzir o payload inicial sem degradar a arte.
 
 ## Evento
 
