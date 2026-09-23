@@ -83,7 +83,7 @@ class SiteAuditParser(HTMLParser):
 
 def is_external(ref: str) -> bool:
     parsed = urlparse(ref)
-    return bool(parsed.scheme or parsed.netloc) or ref.startswith(("data:", "#"))
+    return bool(parsed.scheme or parsed.netloc) or ref.startswith(("data:", "#", "%23"))
 
 
 def main() -> int:
