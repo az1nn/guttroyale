@@ -136,10 +136,8 @@ def main() -> int:
     if not parser.canonical or not parser.canonical.startswith("https://"):
         errors.append("canonical HTTPS absoluto ausente")
 
-    legacy_refs = ("index.html.html", "assets/prince-gutt.png")
-    for legacy_ref in legacy_refs:
-        if legacy_ref in html:
-            errors.append(f"referência legada encontrada no HTML: {legacy_ref}")
+    if "index.html.html" in html or 'assets/' in html:
+        errors.append("referência legada encontrada no HTML")
 
     css = CSS_PATH.read_text(encoding="utf-8")
     for match in re.finditer(r"url\(\s*['\"]?([^)'\"\s]+)", css):

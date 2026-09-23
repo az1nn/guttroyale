@@ -10,7 +10,6 @@ Site oficial estático do **GUTT ROYALE**, preparado para publicação no GitHub
 - `scripts/validate_site.py` — auditoria estática sem dependências externas
 - `.github/workflows/site-quality.yml` — quality gate para pushes e pull requests
 - `robots.txt` e `sitemap.xml` — descoberta por crawlers
-- `assets/final-show-desktop.webp` e `assets/final-show-mobile.webp` — hero otimizado de Prince' Gutt / THE FINAL SHOW
 - assets PNG na raiz — identidade visual e parceiros
 - `.nojekyll` — publicação estática sem processamento Jekyll
 
@@ -54,8 +53,6 @@ Correções consolidadas:
 - fallback para navegadores sem `IntersectionObserver`;
 - suporte a `prefers-reduced-motion`;
 - navegação por teclado e foco visível;
-- homepage promovendo Prince' Gutt como atração final e principal / THE FINAL SHOW;
-- hero responsivo com arte dedicada para desktop e mobile;
 - navegação móvel restaurada;
 - offset de âncoras para o header fixo;
 - SEO/social metadata com URLs absolutas;
